@@ -18,11 +18,11 @@ const OnBoardingScreen = ({navigation}) => {
                     name='user'
                     size={25} color='#666'
                     />
-            {/* <FormInput
+            <FormInput
                 labelValue="Email"
                 placeholderText="Email"
                 iconType="user"
-            /> */}
+            />
             <Button 
                 title="Click here"
                 onPress={() => alert('Button clicked')}
