@@ -1,11 +1,14 @@
-import React from "react";
-import { View, Image, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import FormInput from '../Buttons/FormInput';
 import FormButton from '../Buttons/FormButton';
 import SocialButton from '../Buttons/SocialButton';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const OnBoardingScreen = ({navigation}) => {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
     return (
         <View style={styles.container}>
             <Image
@@ -13,20 +16,50 @@ const OnBoardingScreen = ({navigation}) => {
                 style={styles.logo}
             />
             <Text style={styles.text}>SocialNet</Text>
-            <AntDesign
-                    style={styles.iconStyle}
-                    name='user'
-                    size={25} color='#666'
-                    />
             <FormInput
-                labelValue="Email"
+                onChangeText={(userEmail) => setEmail(userEmail)}
+                labelValue={email}
                 placeholderText="Email"
                 iconType="user"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
             />
-            <Button 
-                title="Click here"
-                onPress={() => alert('Button clicked')}
+            <FormInput
+                onChangeText={(userPassword) => setPassword(userPassword)}
+                labelValue={password}
+                placeholderText="Password"
+                iconType="lock"
+                secureTextEntry={true}
             />
+            <FormButton 
+                buttonTitle="Sign In"
+                onPress={() =>alert("Sign In Clicked!")}
+            />
+            <TouchableOpacity 
+                style={styles.forgotButton}
+                onPress={() => {}}>
+                <Text style={styles.navButtonText}>Forgot Password?</Text>
+            </TouchableOpacity>
+            <SocialButton
+                buttonTitle="Sign In with Facebook"
+                buttonType="facebook"
+                color="#4867aa"
+                backgroundColor="#e6eaf4"
+                onPress={() => alert("Sign In with Facebook")}
+            />
+            <SocialButton
+                buttonTitle="Sign In with Google"
+                buttonType="google"
+                color="#de4d41"
+                backgroundColor="#f5e7ea"
+                onPress={() => alert("Sign In with Google")}
+            />
+            <TouchableOpacity
+                style={styles.forgotButton}
+                onPress={() => navigation.navigate('signup')}>
+                <Text style={styles.navButtonText}>Don't have an account? Create here</Text>
+            </TouchableOpacity>
         </View>
     );
 }
